@@ -26,7 +26,9 @@ const persons = [
 
 app.use(express.json())
 
-//routes here
+app.get('/api/persons', (request, response) => {
+    response.json(persons)
+})
 
 const PORT = 3001
 app.listen(PORT, () => {
