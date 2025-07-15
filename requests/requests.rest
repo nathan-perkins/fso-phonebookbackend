@@ -1,0 +1,13 @@
+GET http://localhost:3001/api/persons
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Nathan Perkins",
+    "number": "706-990-0985"
+}
+
+###
+DELETE http://localhost:3001/api/persons

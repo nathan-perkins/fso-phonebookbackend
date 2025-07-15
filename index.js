@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-const persons = [
+let persons = [
     { 
         "id": "1",
         "name": "Arto Hellas", 
@@ -30,6 +30,7 @@ app.get('/info', (request, response) => {
     response.send(`
         <p>Phonebook has info for ${persons.length} people</p>
         <p>${new Date()}</p>
+        <p>Generated id is ${generateId()}</p>
     `)
 })
 
@@ -46,6 +47,25 @@ app.get('/api/persons/:id', (request, response) => {
     } else {
         response.status(404).end()
     }
+})
+
+const generateId = () => {
+    const generatedId = Math.floor(Math.random() * 1000) + 1
+    return String(generatedId)
+}
+
+app.post('/api/persons', (request, response) => {
+    const body = request.body
+
+    const person = {
+        id: generateId(),
+        name: body.name,
+        number: body.number
+    }
+
+    persons = persons.concat(person)
+
+    response.json(person)
 })
 
 app.delete('/api/persons/:id', (request, response) => {
